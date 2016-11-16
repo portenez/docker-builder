@@ -2,7 +2,6 @@ sudo: required
 language: generic
 services:
   - docker
-before
 script:
   - docker build -t portenez/docker-builder:base base
 after_success:
