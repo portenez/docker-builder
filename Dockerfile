@@ -6,7 +6,8 @@ RUN apt-get install -y \
     git \
     libssl-dev \
     build-essential \
-    software-properties-common
+    software-properties-common \
+    wget
 RUN curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash \
     && sudo apt-get install -y nodejs \
     && npm install -g n \

@@ -2,5 +2,11 @@ sudo: required
 language: generic
 services:
   - docker
+before
 script:
-  - docker build -t portenez/builder .
+  - docker build -t portenez/docker-builder:base base
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+    docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+    docker push portenez/docker-builder:base;
+    fi
