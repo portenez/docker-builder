@@ -4,8 +4,10 @@ services:
   - docker
 script:
   - docker build -t portenez/docker-builder:base base
+  - docker build -t portenez/docker-builder:node-n node-n
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
     docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
     docker push portenez/docker-builder:base;
+    docker push portenez/docker-builder:node-n;
     fi
