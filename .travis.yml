@@ -4,12 +4,13 @@ services:
   - docker
 script:
   - docker build -t portenez/docker-builder:base base
-  - docker build -t portenez/docker-builder:node-n node-n
-  - docker build -t portenez/docker-builder:nightwatch nightwatch
-after_success:
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then
-    docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-    docker push portenez/docker-builder:base;
-    docker push portenez/docker-builder:node-n;
-    docker push portenez/docker-builder:nightwatch;
-    fi
+  - docker run -it portenez/docker-builder:base "docker --version"
+#   - docker build -t portenez/docker-builder:node-n node-n
+#   - docker build -t portenez/docker-builder:nightwatch nightwatch
+# after_success:
+#   - if [ "$TRAVIS_BRANCH" == "master" ]; then
+#     docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+#     docker push portenez/docker-builder:base;
+#     docker push portenez/docker-builder:node-n;
+#     docker push portenez/docker-builder:nightwatch;
+#     fi
