@@ -1,6 +1,7 @@
 FROM nitrousio/ubuntu-dind:14.04
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get upgrade docker
+RUN apt-get install -y \
     curl \
     git \
     libssl-dev \
