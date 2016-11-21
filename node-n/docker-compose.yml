@@ -1,0 +1,16 @@
+version: '2'
+services:
+  base:
+    image: "portenez/docker-builder:base"
+    build:
+      context: base
+  node-n:
+    image: "portenez/docker-builder:node-n"
+    build:
+      context: node-n
+    depends_on: base
+  nightwatch:
+    image: "portenez/docker-builder:nightwatch"
+    build:
+      context: nightwatch
+    depends_on: node-n
