@@ -8,9 +8,11 @@ services:
     image: "portenez/docker-builder:node-n"
     build:
       context: node-n
-    depends_on: base
+    depends_on:
+    - base
   nightwatch:
     image: "portenez/docker-builder:nightwatch"
     build:
       context: nightwatch
-    depends_on: node-n
+    depends_on:
+    - node-n
