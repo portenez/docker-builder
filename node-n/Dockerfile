@@ -6,4 +6,4 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | bash \
     && n 6.4.0 \
     && n use 6.4.0 \
     && npm install -g yarn \
-    && npm install -g runjs
+    && npm install -g runjs@2.5.1
