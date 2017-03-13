@@ -18,3 +18,12 @@ RUN apt-get install -y \
     xfonts-scalable \
     imagemagick \
     x11-apps
+# Chrome driver
+RUN apt-get install -y unzip
+RUN wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/2.28/chromedriver_linux64.zip \
+    && cd /tmp \
+    && unzip chromedriver.zip \
+    && chmod a+x chromedriver \
+    && mv -f chromedriver /usr/local/share/chromedriver \
+    && ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver \
+    && ln -s /usr/local/share/chromedriver /usr/bin/chromedriver
