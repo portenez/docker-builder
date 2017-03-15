@@ -10,4 +10,5 @@ after_success:
     docker push portenez/docker-builder:base;
     docker push portenez/docker-builder:node-n;
     docker push portenez/docker-builder:nightwatch;
+    docker push portenez/docker-builder:sitespeed;
     fi

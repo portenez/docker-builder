@@ -16,3 +16,9 @@ services:
       context: nightwatch
     depends_on:
     - node-n
+  sitespeed:
+    image: "portenez/docker-builder:sitespeed"
+    build:
+      context: sitespeed
+    depends_on:
+    - nightwatch
