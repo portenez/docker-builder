@@ -4,6 +4,7 @@ RUN apt-get update \
     && apt-get install -y \
     curl \
     git \
+    zip \
     libssl-dev \
     build-essential \
     software-properties-common \
