@@ -1,24 +1,44 @@
 version: '2'
 services:
   base:
-    image: "portenez/docker-builder:base"
+    image: "portenez/docker-builder:xenial"
     build:
       context: base
-  node-n:
-    image: "portenez/docker-builder:node-n"
+      args:
+        docker_compose_version: 1.14.0
+  node:
+    image: "portenez/docker-builder:xenial-node8"
     build:
       context: node-n
+      args:
+        node_version: 8.1.3
+        runjs_version: 3.4.1
+    depends_on:
+    - base
+  node-runjs2:
+    image: "portenez/docker-builder:xenial-node8-runjs2"
+    build:
+      context: node-n
+      args:
+        node_version: 8.1.3
+        runjs_version: 2.5.1
     depends_on:
     - base
   nightwatch:
-    image: "portenez/docker-builder:nightwatch"
+    image: "portenez/docker-builder:xenial-node8-nightwatch"
     build:
       context: nightwatch
+      args:
+        chrome_driver_version: '2.30'
+        base_container: xenial-node8
     depends_on:
-    - node-n
-  sitespeed:
-    image: "portenez/docker-builder:sitespeed"
+    - node
+  nightwatch-runjs2:
+    image: "portenez/docker-builder:xenial-node8-nightwatch-runjs2"
     build:
-      context: sitespeed
+      context: nightwatch
+      args:
+        chrome_driver_version: '2.30'
+        base_container: xenial-node8-runjs2
     depends_on:
-    - nightwatch
+    - node

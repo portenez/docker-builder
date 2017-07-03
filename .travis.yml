@@ -1,14 +1,24 @@
 sudo: required
 language: generic
+env:
+  - DOCKER_COMPOSE_VERSION=1.14.0
+before_install:
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+  - sudo apt-get update
+  - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
 services:
   - docker
 script:
   - docker-compose build
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
-    docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-    docker push portenez/docker-builder:base;
-    docker push portenez/docker-builder:node-n;
-    docker push portenez/docker-builder:nightwatch;
-    docker push portenez/docker-builder:sitespeed;
+    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+    docker push portenez/docker-builder:xenial;
+    docker push portenez/docker-builder:xenial-node8;
+    docker push portenez/docker-builder:xenial-node8-runjs2;
+    docker push portenez/docker-builder:xenial-node8-nightwatch;
+    docker push portenez/docker-builder:xenial-node8-nightwatch-runjs2;
     fi
