@@ -13,3 +13,4 @@ RUN npm install -g n \
 
 RUN npm install -g yarn@${yarn_version}
 RUN npm install -g runjs@${runjs_version}
+RUN npm install -g nodemon
